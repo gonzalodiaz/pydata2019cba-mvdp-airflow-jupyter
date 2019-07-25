@@ -1,0 +1,37 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+  jupyter-on-nteract:
+    build: './jupyter'
+    depends_on:
+      - postgres
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
+      - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
+  webserver:
+    image: puckel/docker-airflow:1.10.3
+    restart: always
+    depends_on:
+      - postgres
+      - jupyter-on-nteract
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+    volumes:
+      - ./airflow/dags:/usr/local/airflow/dags
+      - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
+    ports:
+      - "8080:8080"
+    command: webserver
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
