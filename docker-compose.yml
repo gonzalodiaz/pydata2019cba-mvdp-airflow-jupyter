@@ -6,6 +6,9 @@ services:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow
+      - PGDATA=/var/lib/pgsql/data
+    volumes:
+      - ./airflow_pydata/pgdata:/var/lib/pgsql/data
   jupyter-on-nteract:
     build: './jupyter'
     depends_on:
@@ -15,17 +18,17 @@ services:
     volumes:
       - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
       - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
-  webserver:
-    image: puckel/docker-airflow:1.10.3
+  airflow-webserver:
+    build: './airflow_pydata'
     restart: always
     depends_on:
       - postgres
-      - jupyter-on-nteract
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local
     volumes:
-      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow_pydata/dags:/usr/local/airflow/dags
+      - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
       - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
     ports:
       - "8080:8080"
@@ -35,3 +38,16 @@ services:
       interval: 30s
       timeout: 30s
       retries: 3
+  airflow-scheduler:
+    build: './airflow_pydata'
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+    volumes:
+      - ./airflow_pydata/dags:/usr/local/airflow/dags
+      - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
+      - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
+    command: scheduler
