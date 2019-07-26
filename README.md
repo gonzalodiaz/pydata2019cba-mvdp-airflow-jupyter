@@ -1,3 +1,5 @@
+# [PyData 2019 CBA] - Minimum Valuable Data Products with Airflow and Jupyter
+
 ## Build
 `docker-compose build`
 
