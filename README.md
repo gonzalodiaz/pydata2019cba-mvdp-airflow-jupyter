@@ -1,10 +1,14 @@
 # [PyData 2019 CBA] - Minimum Valuable Data Products with Airflow and Jupyter
 
-## Build
-`docker-compose build`
+## Build
+```
+docker-compose build
+```
 
 ## Launch
-`docker-compose up`  
+```
+docker-compose up
+```
 Go to http://localhost:8888 to Open Jupyter Labs
 
 Go to http://localhost:8080 to Open Airflow 
