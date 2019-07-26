@@ -20,13 +20,7 @@
 import papermill as pm
 
 from airflow.models import BaseOperator
-from airflow.lineage.datasets import DataSet
 from airflow.utils.decorators import apply_defaults
-
-
-class NoteBook(DataSet):
-    type_name = "jupyter_notebook"
-    attributes = ['location', 'parameters']
 
 
 class PapermillOperator(BaseOperator):
@@ -44,14 +38,10 @@ class PapermillOperator(BaseOperator):
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.inlets.append(NoteBook(qualified_name=input_nb,
-                                    location=input_nb,
-                                    parameters=parameters))
-        self.outlets.append(NoteBook(qualified_name=output_nb,
-                                     location=output_nb))
+        self.input_nb = input_nb
+        self.output_nb = output_nb
+        self.parameters = parameters
 
     def execute(self, context):
-        for i in range(len(self.inlets)):
-            pm.execute_notebook(self.inlets[i].location, self.outlets[i].location,
-                                parameters=self.inlets[i].parameters,
-                                progress_bar=True, report_mode=True)
+        pm.execute_notebook(self.input_nb, self.output_nb, parameters=self.parameters, progress_bar=True,
+                            report_mode=True)

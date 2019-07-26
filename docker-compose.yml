@@ -16,8 +16,7 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
-      - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
+      - ./jupyter/templates:/home/jovyan/work/jupyter/templates
   airflow-webserver:
     build: './airflow_pydata'
     restart: always
@@ -28,8 +27,7 @@ services:
       - EXECUTOR=Local
     volumes:
       - ./airflow_pydata/dags:/usr/local/airflow/dags
-      - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
-      - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
+      - ./jupyter/templates:/home/jovyan/work/jupyter/templates
     ports:
       - "8080:8080"
     command: webserver
@@ -48,6 +46,5 @@ services:
       - EXECUTOR=Local
     volumes:
       - ./airflow_pydata/dags:/usr/local/airflow/dags
-      - ./jupyter/notebooks:/home/jovyan/work/jupyter/notebooks
-      - ./jupyter/notebooks_outputs:/home/jovyan/work/jupyter/notebooks_outputs
+      - ./jupyter/templates:/home/jovyan/work/jupyter/templates
     command: scheduler
