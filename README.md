@@ -2,9 +2,12 @@
 `docker-compose build`
 
 ## Launch
-`docker-compose up`
-And go to http://localhost:8888
+`docker-compose up`  
+Go to http://localhost:8888 to Open Jupyter Labs
 
+Go to http://localhost:8080 to Open Airflow 
 
-Source:
-https://www.kaggle.com/rochellesilva/simple-tutorial-for-beginners
+## Test it
+In Airflow, turn on the DAG and press "Trigger DAG". This will run an execution.
+
+Once the DAG complete, check the output csv files in the folder `jupyter/templates/datasets/output`.
