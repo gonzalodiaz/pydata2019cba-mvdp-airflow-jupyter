@@ -2,10 +2,11 @@ FROM jupyter/minimal-notebook
 
 ## Setup Python environment
 ADD requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt 
+RUN pip install -r /requirements.txt
+
+RUN npm install -g npm
 
 RUN set -xe; \
-    #jupyter serverextension enable nteract_on_jupyter; \
     : disable authentication; \
     echo "c.NotebookApp.token = ''"    >> ${HOME}/.jupyter/jupyter_notebook_config.py; \
     echo "c.NotebookApp.password = ''" >> ${HOME}/.jupyter/jupyter_notebook_config.py; \
