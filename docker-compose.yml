@@ -17,11 +17,23 @@ services:
       - "8888:8888"
     volumes:
       - ./jupyter/templates:/home/jovyan/work/jupyter/templates
+  airflow-initdb:
+    build: './airflow_pydata'
+    depends_on:
+      - postgres
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+    volumes:
+      - ./airflow_pydata/dags:/usr/local/airflow/dags
+      - ./jupyter/templates:/home/jovyan/work/jupyter/templates
+    command: upgradedb
   airflow-webserver:
     build: './airflow_pydata'
     restart: always
     depends_on:
       - postgres
+      - airflow-initdb
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local
@@ -41,6 +53,7 @@ services:
     restart: always
     depends_on:
       - postgres
+      - airflow-initdb
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local
