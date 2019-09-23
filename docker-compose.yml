@@ -9,7 +9,7 @@ services:
       - PGDATA=/var/lib/pgsql/data
     volumes:
       - ./airflow_pydata/pgdata:/var/lib/pgsql/data
-  jupyter-on-nteract:
+  jupyter-labs:
     build: './jupyter'
     depends_on:
       - postgres
