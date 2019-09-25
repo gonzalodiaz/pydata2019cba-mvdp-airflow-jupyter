@@ -14,22 +14,22 @@ with DAG(
 
     titanic_100_estimators = PapermillOperator(
         task_id="titanic-100-estimators",
-        input_nb="/home/jovyan/work/jupyter/templates/nb_originals/KaggleTitanic.ipynb",
-        output_nb="/home/jovyan/work/jupyter/templates/nb_outputs/KaggleTitanic-100-estimators.ipynb",
+        input_nb="/nb_originals/KaggleTitanic.ipynb",
+        output_nb="/nb_outputs/KaggleTitanic-100-estimators.ipynb",
         parameters={"n_estimators": 100}
     )
 
     titanic_200_estimators = PapermillOperator(
         task_id="titanic-200-estimators",
-        input_nb="/home/jovyan/work/jupyter/templates/nb_originals/KaggleTitanic.ipynb",
-        output_nb="/home/jovyan/work/jupyter/templates/nb_outputs/KaggleTitanic-200-estimators.ipynb",
+        input_nb="/nb_originals/KaggleTitanic.ipynb",
+        output_nb="/nb_outputs/KaggleTitanic-200-estimators.ipynb",
         parameters={"n_estimators": 200}
     )
 
     titanic_500_estimators = PapermillOperator(
         task_id="titanic-500-estimators",
-        input_nb="/home/jovyan/work/jupyter/templates/nb_originals/KaggleTitanic.ipynb",
-        output_nb="/home/jovyan/work/jupyter/templates/nb_outputs/KaggleTitanic-500-estimators.ipynb",
+        input_nb="/nb_originals/KaggleTitanic.ipynb",
+        output_nb="/nb_outputs/KaggleTitanic-500-estimators.ipynb",
         parameters={"n_estimators": 500}
     )
 
