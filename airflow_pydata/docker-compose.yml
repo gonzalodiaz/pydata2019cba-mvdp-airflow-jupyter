@@ -9,6 +9,17 @@ services:
       - PGDATA=/var/lib/pgsql/data
     volumes:
       - ./airflow_pydata/pgdata:/var/lib/pgsql/data
+  airflow-initdb:
+    build: './airflow_pydata'
+    depends_on:
+      - postgres
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+    volumes:
+      - ./airflow_pydata/dags:/usr/local/airflow/dags
+      - ./jupyter/templates:/home/jovyan/work/jupyter/templates
+    command: upgradedb
   airflow-webserver:
     build: './airflow_pydata'
     restart: always
