@@ -1,0 +1,5 @@
+--repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+--repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+py3-scikit-learn
+py3-scipy
+py3-pyzmq
