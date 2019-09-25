@@ -25,6 +25,7 @@ services:
     restart: always
     depends_on:
       - postgres
+      - airflow-initdb
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local
@@ -44,6 +45,7 @@ services:
     restart: always
     depends_on:
       - postgres
+      - airflow-initdb
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local
