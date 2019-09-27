@@ -1,18 +1,7 @@
 version: '3'
 services:
-  postgres:
-    image: postgres:9.6
-    environment:
-      - POSTGRES_USER=airflow
-      - POSTGRES_PASSWORD=airflow
-      - POSTGRES_DB=airflow
-      - PGDATA=/var/lib/pgsql/data
-    volumes:
-      - ./airflow_pydata/pgdata:/var/lib/pgsql/data
   jupyter-labs:
     build: './jupyter'
-    depends_on:
-      - postgres
     ports:
       - "8888:8888"
     volumes:
