@@ -1,7 +1,7 @@
 # [PyData 2019 CBA] - Minimum Valuable Data Products with Airflow and Jupyter
 
 ## Slide Deck
-[PDF](./slide_deck/pydatacba2019_mvdp_pipelines_pdf.pdf)
+[PDF](./slide_deck/pydatacba2019_mvdp_pipelines_pdf.pdf). Download to see all the slides.  
 
 Daniel Imberman - Platform Engineer  
 t: @danimberman  
