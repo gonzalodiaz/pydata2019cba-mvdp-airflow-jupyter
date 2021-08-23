@@ -2,5 +2,5 @@ pandas==0.24.2
 numpy==1.16.4
 scikit-learn==0.21.2
 papermill==1.0.1
-jupyterlab==1.0.3
+jupyterlab==1.2.21
 Flask==1.0.4
